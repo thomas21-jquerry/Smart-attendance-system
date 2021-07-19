@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+</head>
+<body>
+    <div class="center">
+        <h1>Login</h1>
+        <form action="{{ url_for('login')}}" id="mform"  method="POST">
+            <div class="txt_field">
+                <input type="text" pattern="[0-9]+"  name="check_id"  required>
+                <label>personal id</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="check_name" required>
+                <label>password</label>
+            </div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                <a href="{{'signup'}}">Admin signup</a>
+            </div>
+        </form>
+        
+
+    </div>
+    {% if s== 1 %}
+    	<h3>Invalid password or id</h3>
+    {% endif%}
+    .
+</body>
+</html>

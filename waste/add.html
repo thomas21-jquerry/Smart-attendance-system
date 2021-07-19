@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+    <div style="text-align: center;">
+    <h2 align="center">Add class photo</h2>
+    <form action="{{ url_for('creating')}}" id="myform" 
+        enctype="multipart/form-data" method="POST">
+        <label for="age">Personal Id:</label>
+        <input type="number" id="id_number" name="p_id" min="100" max="999" placeholder="00000" required><br><br>      
+        <label for="fname">Name:</label>
+        <input type="text" id="fname" name="name" placeholder="Name"><br><br>
+        {% for z in dt %}
+        <input type="radio" id="{{z}}" name="class" value="{{z}}">
+        <label for="{{z}}">{{z}}</label><br>
+        {% endfor %}
+        <input type="file" name="imagefile" id="imagefile"/><br><br>
+        <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd"><br><br>
+        <input type="submit" />
+    </form>
+    </div>
+    <div style="text-align: center;">
+    {%  if st %}
+    <p>successfully added </p>
+    <p>{{val_name}}</p>
+    {% endif %}
+    </div>
+    <div>
+        
+    </div>
+    <div style="text-align: center;">
+    <br><br>
+    <a href="{{'attendance'}}">Check Attendance</a>
+    <a href="{{'redirect'}}">Home</a><br><br>
+    </div>
+
+</body>
+</html>

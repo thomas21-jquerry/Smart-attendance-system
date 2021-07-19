@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Student</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+	<link rel="stylesheet" href="{{url_for('static', filename='student.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
+        <div class="container-fluid" style="font-size: 20px;">
+          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="margin-left: 7vh;">
+              <a class="nav-link" href="https://github.com/thomas21-jquerry/SmartAttendanceSystem"><i class="fab fa-github"></i></a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="{{'logout'}}">Logout</a>
+              
+             
+              
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <div class="wrapper" style="height: max-content;">
+        <div class="left" style="background: linear-gradient(to right,#14ad00f1,#0bff03); height: 100vh;width: 40%;left:0; margin:0 0">
+            <img src="{{url_for('static', filename=data['image'])}}"  alt="..." width="100">
+            <h4>{{data['name'] | safe }}</h4>
+            <p>{{data['role'] | safe }}</p>
+        </div>
+        <div class="right">
+            <div class="info">
+                <h3>Information</h3>
+                <div class="info_data">
+                    <div class="data">
+                        <h4>Name</h4>
+                        <p>{{data['name'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                    <h4>Role</h4>
+                        <p>{{data['role'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Collage Id</h4>
+                        <p>{{data['c_id'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Collage Name</h4>
+                        <p>{{data['c_name'] | safe }}</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="projects">
+                <h3>Attendance Graph</h3>
+                <div class="projects_data">
+                    <div class="data">
+                        <canvas id="myChart" width="100%" height="40vh"></canvas>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="projects">
+                <h3>Percentage</h3>
+                <br>
+                <div>
+                    <table class="table table-dark table-striped table-hover" style="margin: 0 auto;text-align: center;max-width: 80%; margin-bottom: 10px;">
+                        <tr>
+                            <th> info</th>
+                            {% for j in subjectNames %}  
+                                <th>{{ j }}</th>        
+                            {% endfor %}  
+                        </tr> 
+                        <tr>
+                            <td>total Attendance</td>
+                            {% for j in presentAtt %}
+                                <td>{{j}}</td>
+                            {% endfor %}
+                                
+                        </tr>                                                  
+                        <tr>
+                            <td>total classes</td>
+                            {% for j in totalAttendance %}
+                                <td>{{j}}</td>
+                            {% endfor %}
+                                
+                        </tr>
+                        <tr>
+                            <td>persentage</td>
+                            {% for j in avgAttendance %}
+                                <td>{{j}} %</td>
+                            {% endfor %}
+                                
+                        </tr>
+                             
+                            <br>
+                          
+                    </table> 
+                </div>
+               
+            </div>
+        
+            <div class="social_media">
+                <ul>
+                    <li style="background: linear-gradient(to right,#14ad00f1,#0bff03);border-radius: 5px;"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li style="background: linear-gradient(to right,#14ad00f1,#0bff03);border-radius: 5px;"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li style="background: linear-gradient(to right,#14ad00f1,#0bff03);border-radius: 5px;"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h2 style="text-align: center; margin-top: 3vh;">Function</h2>
+        <div style="display: flex; justify-content: center; margin-bottom: 10vh;">
+            <a href="{{'file'}}" class="btn btn-info">complain</a>
+        </div>
+        
+        <div style="text-align: center; padding-bottom: 5px;">
+            <h2>Attendance Collection</h2>
+            
+            <table class="table table-dark table-striped table-hover" style="margin: 0 auto;text-align: center;max-width: 80%; margin-bottom: 10px;">
+                <tr>
+                    <th>subject</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                  {% set presentcount =  namespace(value=0) %}
+                  {% set totalcount = namespace(value=0) %}
+                    {% for x in at %}
+                    <tr>
+                        <td>{{x['subject']}}</td>
+                        {% set testing = x['_id'] %}
+                        {% set time = testing[0:2] %}
+                        {% set date = testing[3:] %}
+                        <td>{{time}}</td>
+                        <td>{{date}}</td>
+                        {% if nam in x['present'] %}
+                        {% set presentcount.value = presentcount.value + 1 %}
+                        <td>present</td>
+                        {% else %}
+                        <td>absent</td>
+                       {% endif%}
+                       {% set totalcount.value = totalcount.value + 1 %}
+                    </tr>
+                    {% endfor %}  
+                  
+        
+            </table> 
+        </div>    
+            <!-- <h2>{{presentcount.value}}</h2>
+            <h2>{{totalcount.value}}</h2> -->
+</body>
+<script >
+    var xValues = {{ teachernames | safe }};
+    var yValues = {{ countatt | safe }};
+    var barColors = ["yellow", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+    }]
+  },
+  
+});
+
+</script>
+</html>

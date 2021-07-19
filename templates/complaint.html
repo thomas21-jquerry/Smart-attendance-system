@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>complaint</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
+        <div class="container-fluid" style="font-size: 20px;">
+          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="margin-left: 7vh;">
+              <a class="nav-link" href="{{'logout'}}"><i class="fab fa-github"></i></a>
+              <a class="nav-link active" aria-current="page" href="{{'redirect'}}">Home</a>
+              <a class="nav-link" href="{{'logout'}}">Logout</a>
+              
+             
+              
+            </div>
+          </div>
+        </div>
+    </nav>
+    <div class="center" style="height:auto; width:auto">
+        <h1>Complaint</h1>
+        <form action="{{ url_for('complaint')}}" id="m"  method="POST">
+           <h3>Teacher</h3>
+            <div class="check" style="display: flex; align-items: center; justify-content: center;">
+                {% for j in dp %}
+                <input type="radio"  name="teach" value="{{j}}" required>
+                <label style="font-size: 16px;">{{j}}</label>
+                {% endfor %}
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 10vh; margin-bottom: 10vh;">
+                <textarea id="review" name="complaint" rows="4" cols="40" ></textarea>
+            </div>
+        
+            <input type="submit" />
+
+
+        </form>
+        <div id="success" style="color: green; font-size: 25px; display: flex;justify-content: center;">
+
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+    <!-- <div class="center">
+        <h1>complaint</h1>
+        <form action="{{ url_for('complaint')}}" id="m"  method="POST">
+           
+            <label> Teacher:</label>
+            <div class="check" style="display: flex; align-items: center; justify-content: center;">
+                {% for j in dp %}
+                <input type="radio"  name="teach" value="{{j}}">
+                <label style="font-size: 16px;">{{j}}</label>
+                {% endfor %}
+                <textarea id="review" name="complaint" rows="4" cols="50"></textarea>
+                    <input type="submit" />
+            
+                
+        </form>
+    </div>
+
+    <a href="{{'redirect'}}" style="padding: 5px;">Home</a> -->
+    
+    .
+    <div> 
+        {% if  c==1%}
+    	<script>
+            suc = document.getElementById("success")
+            suc.innerHTML = "successfull";
+        </script>
+        {% endif %}
+    </div>
+    
+</body>
+</html>

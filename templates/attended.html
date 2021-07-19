@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attended</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='attended.css')}}">
+    <style>
+        img {
+            
+            display:block;    
+            width:50px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+        
+        <h3 style="text-align: center;">Date: {{divasam}}</h3>
+        <h3 style="text-align: center;">Time: {{samayam}}:00</h3>
+    <div class="center">
+        <h1 style="margin-top: 20px;">Present</h1>
+        <table class="table table-dark table-striped table-hover" style="margin: 0 auto;text-align: center;max-width: 80%; margin-bottom: 25px;">
+            <tr>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>change</th>
+            </tr>
+
+            {% for x in val %}
+                <tr>
+                
+                    <td>{{x[0]}}</td>
+                    
+                    <td><img src="{{url_for('static', filename=x[1]+'.jpg')}}" alt="..." ></td>
+                    
+                    <td><form action="sendstat" method="post">
+                        <input type = "hidden" name = "student" value = {{x[0]}} />
+                        <input type = "hidden" name = "class_no" value = {{simple}} />
+                        <input type="hidden" name="id" value={{x[1]}} />
+                        <input type="hidden" name="dates" value={{divasam}} />
+                        <input type="hidden" name="times" value={{samayam}} />
+                        <input type = "hidden" name = "change_State" value = "absent" />
+                        <input type = "hidden" name = "class_id" value = "{{class_info}}" />
+                        <button  type="submit" style="background-color: red ;border-radius: 10%;">mark absent</button></td></form>
+                
+                
+                </tr>
+            {% endfor %}  
+    
+        </table>
+
+
+
+
+        <h1>Absent</h1>
+        <table class="table table-striped table-hover" style="margin: 0 auto;text-align: center; max-width: 80%">
+            <tr>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Change</th>
+            </tr>
+            {% for x in vall %}
+                <tr>
+                
+                    <td>{{x[0]}}</td>
+                    <td><img src="{{url_for('static', filename=x[1]+'.jpg')}}"  alt="..."></td>
+                    <td><form action="sendstat" method="post">
+                        <input type = "hidden" name = "student" value = {{x[0]}} />
+                        <input type="hidden" name="id" value={{x[1]}} />
+                        <input type="hidden" name="dates" value={{divasam}} />
+                        <input type="hidden" name="times" value={{samayam}} />
+                        <input type = "hidden" name = "class_no" value = {{simple}} />
+                        <input type = "hidden" name = "change_State" value = "present" />
+                        <input type = "hidden" name = "class_id" value = "{{class_info}}" />
+                        <button  type="submit" style="background-color: greenyellow; border-radius: 10%;">mark present</button></td></form>
+                
+                
+                </tr>
+            {% endfor %}  
+    
+        </table>
+
+
+        
+        <div style="padding-top: 20px;">
+            <a href="{{'redirect'}}" class="btn btn-info" style="margin: 5px; ">Home</a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+<!-- <div style="text-align: center;">
+        <p>present:</p>
+        {% for x in val %}
+        <p>{{x}}</p>
+        {% endfor %}
+        <p>absent</p>
+        {% for x in vall %}
+        <p>{{x}}</p>
+        {% endfor %}
+        
+    </div>
+    <div style="text-align: center;">
+        <br><br>
+        <a href="{{'add'}}">Add students</a><br><br>
+        <a href="{{'attendance'}}">Check Attendance</a><br><br>
+        <a href="{{'redirect'}}">Home</a><br><br>
+        </div> -->

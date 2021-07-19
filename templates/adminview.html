@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+	<link rel="stylesheet" href="{{url_for('static', filename='student.css')}}">
+    
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
+        <div class="container-fluid" style="font-size: 20px;">
+          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="margin-left: 7vh;">
+              <a class="nav-link" href="https://github.com/thomas21-jquerry/SmartAttendanceSystem"><i class="fab fa-github"></i></a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="{{'logout'}}">Logout</a>
+              
+             
+              
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="left">
+            <img src="{{url_for('static', filename=data['image'])}}" 
+            alt="user" width="100">
+            <h4>{{data['name'] | safe }}</h4>
+            <p style="font-size: 16px;">{{data['role'] | safe }}</p>
+        </div>
+        <div class="right">
+            <div class="info">
+                <h3>Information</h3>
+                <div class="info_data">
+                    <div class="data">
+                        <h4>Name</h4>
+                        <p >{{data['name'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                    <h4>Role</h4>
+                        <p>{{data['role'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>CollageId</h4>
+                        <p>{{data['c_id'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Collage Name</h4>
+                        <p>{{data['c_name'] | safe }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Classes</h4>
+                        {% for x in cl %}
+                        <p>{{x['class_name']}}</p>   
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="data">
+                        <h4>Teachers</h4>
+                        {% for x in t %}
+                        <p>{{x['name']}}</p>    
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        
+        <div class="projects">
+                <h3>Functions</h3>
+                <div class="projects_data">
+                    <div class="data">
+                        <a href="{{'createstudent'}}" class="btn btn-primary" style="margin: 1vh;">Add Student</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'createteacher'}}" class="btn btn-info" style="margin: 1vh;">Add Teacher</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'attendance'}}" class="btn btn-warning" style="margin: 1vh;">Check Attendence</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'createclass'}}" class="btn btn-dark" style="margin: 1vh;">Create Class</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'previous'}}" class="btn btn-light" style="height: 10vh;margin: 1vh;">Previous</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'updateatt'}}" class="btn btn-success" style="height: 10vh;margin: 1vh;">Update</a>
+                    </div>
+                    <div class="data">
+                        <a href="{{'editing'}}" class="btn btn-danger" style="height: 10vh; margin: 1vh;">Edit Student</a>
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="social_media">
+                <ul>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+   
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='admin.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body style="background-image: url('https://images.unsplash.com/photo-1518714049508-96a3054cdaef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80');
+background-size: cover;color:white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
+        <div class="container-fluid" style="font-size: 20px;">
+          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="margin-left: 7vh;">
+              <a class="nav-link" href="{{'logout'}}"><i class="fab fa-github"></i></a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="{{'logout'}}">Logout</a>
+              
+             
+              
+            </div>
+          </div>
+        </div>
+    </nav>
+    
+    <div class = "center">
+        <h1>Welcome {{data['name'] | safe }}</h1>
+        <hr>
+        <div class="row">
+            <div class="col" style="display:flex; justify-content:center;padding-bottom: 10px;">
+                
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{url_for('static', filename=data['image'])}}"  alt="...">
+
+                        <div class="card-body" style="color: black;">
+                            <h3 style="text-align: center;">{{data['role']}}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col" >
+                        <div class="colclass" style="background:rgba(0,0,0,0.6); border-radius: 10%; text-shadow: aliceblue; margin:auto; padding: 5vh;">
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Name: {{data['name'] | safe }}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Role: {{data['role'] | safe }}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Collage ID: {{data['c_id'] | safe }}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Collage Name: {{data['c_name'] | safe }}</h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Classes:</h3> 
+                                        {% for x in cl %}
+                                        <h4 style="text-align: center;">{{x['class_name']}}</h4>   
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 style="text-align: center;">Teachers: </h3>
+                                        {% for x in t %}
+                                        <h4 style="text-align: center;">{{x['name']}}</h4>    
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+            </div>
+            <hr>
+                    <h1>Functions</h1>
+
+                <div class="row">
+                    <div class="col d-flex p-2">
+                        <a href="{{'createstudent'}}" class="btn btn-primary">Add Student</a>
+                    </div>
+                    <div class="col d-flex p-2">
+                        <a href="{{'createteacher'}}" class="btn btn-info">Add Teacher</a>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col d-flex p-2">
+                        <a href="{{'attendance'}}" class="btn btn-warning">Check Attendence</a>
+                    </div>
+                    <div class="col d-flex p-2">
+                        <a href="{{'createclass'}}" class="btn btn-dark">Create Class</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex p-2">
+                        <a href="{{'previous'}}" class="btn btn-light">Previous</a>
+                    </div>
+                    <div class="col d-flex p-2">
+                        <a href="{{'updateatt'}}" class="btn btn-success">Update</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex p-2">
+                        <a href="{{'editing'}}" class="btn btn-danger">Edit Student</a>
+                    </div>
+                    
+                </div>
+                    <hr>
+                    
+                    
+
+                
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+</body>
+</html> -->

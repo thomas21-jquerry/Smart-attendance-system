@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Attendance update</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+
+    <style>
+        #sele {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+            }
+        #fi {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+        }
+        #date{
+            color: grey;
+        }
+        #datr{
+            color: grey;
+            border-radius: 4px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h1>Update Attendance</h1>
+        
+        <form action="{{ url_for('update')}}" id="myform" enctype="multipart/form-data" method="POST">
+            <div class="txt_field">
+                <input type="number"  name="time"  required>
+                <label>Time</label>                
+            </div>
+            <div id="date" style="padding-bottom: 20px;padding-left: 20px; padding-right: 20px;">
+                <input type="date"  name="day" id="datr"  required>
+                <label>Date</label>    
+            </div>
+            <div class="check" style="display: flex; align-items: center; justify-content: center; padding-left: 20px;padding-right: 20px; padding-bottom: 30px;">
+                <label style="color: gray;">select class:</label>
+                <select name="class" id="sele">
+                    {% for z in dt %}
+                        <option value="{{z}}" >{{z}}</option>
+                    {% endfor %} 
+                    
+                </select>    
+
+                <!-- {% for z in dt %}
+                <input type="radio"  name="class" value="{{z}}">
+                <label >{{z}}</label>
+                {% endfor %} -->
+            </div>
+            
+            <input type="submit" />
+            <div class="signup_link">
+                <a href="{{'redirect'}}">Home</a>
+            </div>
+
+
+            
+                
+        </form>
+    </div>
+    <div >
+        {% if st==1 %}
+        <div style="position:absolute; height: 100vh; width: 100%; background-color: white; display: flex;align-items: center;justify-content: center;flex-direction: column;">
+            <h2>Present :</h2>
+        {% for x in newp %}
+            <h4>{{x}}</h4>
+            {% endfor %}
+       
+            <h2>Absent :</h2>
+            {% for x in newa %}
+                <h4>{{x}}</h4>
+                {% endfor %}
+          
+        {%endif%}
+        
+        </div>
+        
+        
+       .
+
+    </div>
+    
+</body>
+
+</html>

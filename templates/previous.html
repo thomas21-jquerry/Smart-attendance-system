@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80');
+            background-repeat: repeat-y;
+            background-size:100%; color: white;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        </style>
+</head>
+<body>
+    <div style="text-align: center; ">
+        <h1>classes</h1>   
+        <form action="{{ url_for('processing')}}" id="mform"  method="POST">
+            {% for z in dt %}
+                <input type="radio" id="{{z}}" name="class" value="{{z}}">
+                <label for="{{z}}">{{z}}</label><br>
+            {% endfor %}
+            <br>   
+            <input type="submit" style="border-radius: 10%; background-color: yellow;width: 25%; height: 30px;"/>
+        </form>
+    </div>
+    <div>
+        <div>
+            <hr style="border-top: 1px solid white;">
+            {% for x in inf %}
+                {% set testing = x['_id'] %}
+                {% set time = testing[0:2] %}
+                {% set date = testing[3:] %}
+                <h4 style="text-align: center;">Time: {{time}}</h4>
+                <h4 style="text-align: center;"> </h4>
+                <h4 style="text-align: center;">Date: {{date}} </h4>
+
+                <table class="table table-dark table-striped table-hover" style="margin: 0 auto;text-align: center;max-width: 80%; margin-bottom: 10px;">
+                    <tr>
+                        <th>id</th>
+                        <th>names</th>
+                        <th>status</th>
+                        
+                      </tr>
+                     
+                      {% for j in x['present'] %}
+                        <tr>
+                            <td>{{j[1]}}</td>
+                            <td>{{j[0]}}</td>
+                            <td>present</td>
+                            
+                        </tr>
+                        {% endfor %}  
+                        <br>
+                      
+                </table> 
+                <table class="table table-dark table-striped table-hover" style="margin: 0 auto;text-align: center;max-width: 80%; margin-bottom: 10px;">
+                    <tr>
+                        <th>id</th>
+                        <th>names</th>
+                        <th>status</th>
+                        
+                    </tr>
+                      
+                    {% for j in x['absent'] %}
+                        <tr>
+                            <td>{{j[1]}}</td>
+                            <td>{{j[0]}}</td>
+                            <td>absent</td>
+                            
+                        </tr>
+            
+                    {% endfor %}  
+                </table>
+                <hr style="border-top: 1px solid white;">
+
+                <!-- <h4 style="text-align: center;">Present</h4>
+                {% for j in x['present'] %}
+                    <p style="text-align: center;">{{j}}</p>
+                {% endfor %}
+                <h4 style="text-align: center;">Absent</h4>
+                {% for j in x['absent'] %}
+                    <p style="text-align: center;">{{j}}</p>
+                {% endfor %}
+                <hr style="border-top: 1px solid white;"> -->
+            {% endfor %}
+            
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;justify-content: space-around; padding-bottom: 10px;">
+        <a href="{{'redirect'}}" class="btn btn-danger" style="font-size: 20px; text-decoration: none;">home</a>
+        <a href="{{'download'}}" class="btn btn-danger" style="font-size: 20px; text-decoration: none;">download</a>
+        <a href="{{'logout'}}" class="btn btn-danger" style="font-size: 20px; text-decoration: none;">logout</a>
+        
+        
+    </div>
+        
+      
+  
+
+
+</body>
+</html>
+
+<!-- {% for x in inf %}
+            <p>{{x['_id']}}</p>
+            <p>{{x['teacher']}} :</p>
+            <p>present</p>
+            {% for j in x['present'] %}
+            <p>{{j}}</p>
+            {% endfor %}
+            <p>{{x['absent']}}</p>
+            {% endfor %}
+        </div>
+ -->

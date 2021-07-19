@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+   
+    background-size: cover;
+    
+}
+h3{
+    margin: 0 auto;
+}
+h1{
+    text-align: center;
+    padding-top: 10px;
+}
+h2{
+    text-align: center;
+    padding-bottom: 10px;
+}
+.btn{
+   margin: 0 auto;
+    
+}
+a{
+    margin: 0 auto;
+    color: tomato;
+ }
+ 

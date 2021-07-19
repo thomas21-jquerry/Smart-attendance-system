@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher signup</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+    <style>
+        #sele {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+            }
+            #fi {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+            }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h1>Teacher Signup</h1>
+        <form action="{{url_for('creatingteacher')}}" id="yform" enctype="multipart/form-data" method="POST">
+            <div class="txt_field">
+                <input type="number"  name="p_id"  required>
+                <label>personal id</label>
+            </div>
+            <div class="txt_field">
+                <input type="text"  name="t_name" required>
+                <label>name</label>
+            </div>
+            
+            <!-- <div  class="check" style="display: flex; align-items: center; justify-content: center;">
+            </div> -->
+            <div>   
+                <label style="color: gray;">select class and subject :</label>
+                <!-- <br>
+                <select name="class" id="class" multiple>
+                {% for z in dt %}
+                    <option value="{{z}}" >{{z}}</option>
+                {% endfor %} -->
+                <select name="class" id="sele">
+                    {% for z in dt %}
+                        <option value="{{z}}" >{{z}}</option>
+                    {% endfor %} 
+                    
+                </select>    
+            </div>
+            
+            <div class="txt_field">
+                <input type="password" name="pwd" required>
+                <label>password</label>
+            </div>
+            <div class="txt_field" id="fi" style="color: gray;">
+                <input type="file" name="imagefile" >
+            </div>
+            <input type="submit" />
+
+            
+            <div class="signup_link">
+                <a href="{{'redirect'}}">Home</a>
+            </div>
+        </form>
+        
+
+    </div>
+    <div>
+        {% if  kkk==1%}
+    	<h3> Existing  personal Id</h3>
+        {% endif %}
+    </div>
+    
+  .  
+</body>     
+</html>

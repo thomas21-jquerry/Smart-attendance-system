@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create class</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+    <style>
+        :root {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#tagsss{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tags-input {
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+.tags-input .tag {
+    font-size: 85%;
+    padding: 0.5em 0.75em;
+    margin: 0.25em 0.1em;
+    display: inline-block;
+    background-color: #ddd;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+
+.tags-input .tag:hover {
+    background-color: #3af;
+    color: white;
+}
+
+.tags-input .tag .close::after {
+    content: '×';
+    font-weight: bold;
+    display: inline-block;
+    transform: scale(1.4);
+    margin-left: 0.75em;
+}
+
+.tags-input .tag .close:hover::after {
+    color: red;
+}
+
+.tags-input .main-input {
+    border: 0;
+    outline: 0;
+    padding: 0.5em 0.1em;
+}
+    </style>
+    
+</head>
+<body>
+    <div class="center">
+        <h1>Create Class</h1>
+        <form action="{{url_for('creatingclass')}}" id="yform"  method="POST">
+            <div class="txt_field">
+                <input type="number"  name="class_id"  required>
+                <label>class id</label>
+            </div>
+            <div class="txt_field">
+                <input type="text"  name="class_name" required>
+                <label>class name</label>
+               
+            </div>
+            <div id="tagsss">
+                <label>Add subject</label>
+                <div  class="tags-input" data-name="tags-input" >
+                </div>
+               
+            </div>
+            
+            <input type="submit" />
+            
+            <div class="signup_link">
+                <a href="{{'redirect'}}">Home</a>
+            </div>
+            
+            
+            
+                 
+            
+        
+        </form>
+
+    </div>
+    <div>
+        {% if kk==1 and kkk==1 %}
+    	<h3> Existing Class Name and class Id</h3>
+        {% endif%}
+    </div>
+    .<div>
+        {% if kk==1 and kkk==0 %}
+    	<h3> Existing class Name</h3>
+        {% endif %}
+    </div>
+    <div>
+        {% if  kkk==1 and kk==0 %}
+    	<h3> Existing  class Id</h3>
+        {% endif %}
+    </div>
+    
+    .
+    <script type="text/javascript">
+
+        [].forEach.call(document.getElementsByClassName('tags-input'), function (el) {
+            let hiddenInput = document.createElement('input'),
+                mainInput = document.createElement('input'),
+                tags = [];
+            
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', el.getAttribute('data-name'));
+        
+            mainInput.setAttribute('type', 'text');
+            mainInput.classList.add('main-input');
+            mainInput.addEventListener('input', function () {
+                let enteredTags = mainInput.value.split(',');
+                if (enteredTags.length > 1) {
+                    enteredTags.forEach(function (t) {
+                        let filteredTag = filterTag(t);
+                        if (filteredTag.length > 0)
+                            addTag(filteredTag);
+                    });
+                    mainInput.value = '';
+                }
+            });
+        
+            mainInput.addEventListener('keydown', function (e) {
+                let keyCode = e.which || e.keyCode;
+                if (keyCode === 8 && mainInput.value.length === 0 && tags.length > 0) {
+                    removeTag(tags.length - 1);
+                }
+            });
+        
+            el.appendChild(mainInput);
+            el.appendChild(hiddenInput);
+        
+        
+        
+            function addTag (text) {
+                let tag = {
+                    text: text,
+                    element: document.createElement('span'),
+                };
+        
+                tag.element.classList.add('tag');
+                tag.element.textContent = tag.text;
+        
+                let closeBtn = document.createElement('span');
+                closeBtn.classList.add('close');
+                closeBtn.addEventListener('click', function () {
+                    removeTag(tags.indexOf(tag));
+                });
+                tag.element.appendChild(closeBtn);
+        
+                tags.push(tag);
+        
+                el.insertBefore(tag.element, mainInput);
+        
+                refreshTags();
+            }
+        
+            function removeTag (index) {
+                let tag = tags[index];
+                tags.splice(index, 1);
+                el.removeChild(tag.element);
+                refreshTags();
+            }
+        
+            function refreshTags () {
+                let tagsList = [];
+                tags.forEach(function (t) {
+                    tagsList.push(t.text);
+                });
+                hiddenInput.value = tagsList.join(',');
+            }
+        
+            function filterTag (tag) {
+                return tag.replace(/[^\w -]/g, '').trim().replace(/\W+/g, '-');
+            }
+        });
+            </script>
+</body>
+
+</html>

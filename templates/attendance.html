@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+    <style>
+        #sele {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+            }
+        #fi {
+                border-radius: 4px;
+                height: 25px;
+                color: grey;
+        }
+        #date{
+            color: grey;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="center">
+        <h1>Take Attendance</h1>
+        <form action="{{ url_for('find')}}" id="myform" enctype="multipart/form-data" method="POST">
+            <div class="txt_field">
+                <label>Time:</label>
+                <input type="number"  name="time" required>
+            </div>
+            <div style="padding-bottom: 20px; color: grey;">
+                <label style="color: grey;">Date:</label>
+                <input type="date" id="date" name="dat" required>
+
+            </div>
+           
+            <div>   
+                <label style="color: gray;">select class:</label>
+                <select name="class" id="sele">
+                    {% for z in dt %}
+                        <option value="{{z}}" >{{z}}</option>
+                    {% endfor %} 
+                    
+                </select>    
+            </div>
+            <!-- <div class="check" style="display: flex; align-items: center; justify-content: center;">
+                {% for z in dt %}
+                <input type="radio"  name="class" value="{{z}}">
+                <label style="font-size: 16px;">{{z}}</label>
+                {% endfor %}
+            </div> -->
+            
+            
+            
+            
+            <div class = "imagefile" style="display: flex; align-items: center; justify-content: center;padding-top: 15px;padding-bottom: 20px;color: grey;">
+                <input type="file" name="imgfile" >
+            </div>
+            <input type="submit" />
+            <div class="signup_link">
+                <a href="{{'redirect'}}" style="padding: 5px;">Home</a>
+                <a href="{{'attendance'}}">Check Attendance</a>
+            </div>
+        </form>
+    </div>
+    {%if xs==1%}
+    <h4>Class attendance Exist</h4>
+    {%endif%}
+
+.
+    
+    
+    
+    
+</body>
+</html>

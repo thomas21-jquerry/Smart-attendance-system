@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>success student</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{url_for('static', filename='admin.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="center">
+    {%  if st %}
+    <p style="text-align: center;">successfully added </p>
+    <p> {{val_name}}</p>
+    <p>{{val_id}}</p>   
+    {% endif %}
+    </div>
+    <div style="text-align: center;">
+    <img src="{{url_for('static', filename=usi)}}"  width="300" height="400">
+    <br><br>
+    <br><br>
+    <a href="{{'createstudent'}}">Add students</a><br><br>
+    <a href="{{'attendance'}}">Check Attendance</a><br><br>
+    <a href="{{'redirect'}}">Home</a><br><br>
+    </div>
+
+</body>
+</html>

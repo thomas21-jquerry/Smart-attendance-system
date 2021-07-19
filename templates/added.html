@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>success signup</title>
+    <link rel = "icon" href = 
+    "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
+            type = "image/x-icon">
+    <meta name="viewport" content="width=device-width">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body style="background: linear-gradient(120deg,rgb(255, 255, 255), rgb(0,184,177)); min-height: 100vh; padding-top: 20px;">
+    <div style="display: flex;justify-content: center;align-items: center;">
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: column">
+            <div class="card" style="width: 18rem;">
+                <img src="{{url_for('static', filename=usi)}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 style="text-align: center;">successfully added</h3>
+                    <p style="text-align: center;">{{val_name}}</p>
+                    <p style="text-align: center;">{{val_id}}</p>
+                </div>
+            </div>
+            <br>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{'createstudent'}}" class="btn btn-warning" style="margin: 5px;">Add students</a>
+                <a href="{{'attendance'}}" class="btn btn-danger" style="margin: 5px;">Check Attendance</a>
+                <a href="{{'redirect'}}" class="btn btn-success" style="margin: 5px;">Home</a>
+              </div>
+
+
+        </div> 
+
+            
+    </div>
+        
+    
+
+</body>
+</html>
+
+
+
