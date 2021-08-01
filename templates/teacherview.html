@@ -7,29 +7,26 @@
     "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
             type = "image/x-icon">
 	<link rel="stylesheet" href="{{url_for('static', filename='student.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='demo.css')}}">
     
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
-        <div class="container-fluid" style="font-size: 20px;">
-          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" style="margin-left: 7vh;">
-              <a class="nav-link" href="https://github.com/thomas21-jquerry/SmartAttendanceSystem"><i class="fab fa-github"></i></a>
-              <a class="nav-link active" aria-current="page" href="{{'redirect'}}">Home</a>
-              <a class="nav-link" href="{{'logout'}}">Logout</a>
-              
-             
-              
-            </div>
-          </div>
-        </div>
-    </nav>
+    <div class="topnav" id="myTopnav">
+        <a href="#" class="active" style="background-color:purple;width:10%"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+        <a href="#">About</a>
+        <a href="{{'redirect'}}">Home</a>
+        <a href="{{'logout'}}">Logout</a>
+        <a href="https://github.com/thomas21-jquerry/Smart-attendance-system"><i class="fab fa-github" style="font-size: 1.5em;"></i></i></a>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    
 
     <div class="wrapper">
         <div class="left" style="background: linear-gradient(to right,#b400b4,#ff1fec);">
@@ -89,7 +86,7 @@
                         <a href="{{'editing'}}" class="btn btn-danger" style="height: 10vh; margin: 1vh;">Edit Student</a>
                     </div>
                     <div class="data">
-                        <a href="{{'view'}}" class="btn btn-info" style="height: 10vh; margin: 1vh;">complaints</a>
+                        <a href="{{'view'}}" class="btn btn-info" style="height: 10vh; margin: 1vh;">Complaints</a>
                     </div>
                     
                 </div>
@@ -113,130 +110,3 @@
 
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='admin.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
-<body style="background-image: url('https://images.unsplash.com/photo-1518714049508-96a3054cdaef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80');
-background-size: cover;color:white">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
-        <div class="container-fluid" style="font-size: 20px;">
-          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" style="margin-left: 7vh;">
-              <a class="nav-link" href="{{'logout'}}"><i class="fab fa-github"></i></a>
-              <a class="nav-link active" aria-current="page" href="{{'redirect'}}">Home</a>
-              <a class="nav-link" href="{{'logout'}}">Logout</a>
-              
-             
-              
-            </div>
-          </div>
-        </div>
-    </nav>
-    <div class = "center">
-        <h1>Welcome {{data['name'] | safe }} </h1>
-        <hr>
-        <br>
-        <div class="container" >
-            <div class="row">
-                <div class="col" style="display: flex; justify-content: center;">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{url_for('static', filename=data['image'])}}"  alt="...">
-                        <div class="card-body" style="color: rgba(0,0,0,1);">
-                            <h3 style="text-align: center;">{{data['role']}}</h3>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col">
-                    <div class="colclass" style="background:rgba(0,0,0,0.6); border-radius: 10%; text-shadow: aliceblue;"">
-                        <div class="row">
-                            <div class="col">
-                                <h3 style="text-align: center;">Name: {{data['name'] | safe }}</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h3 style="text-align: center;">Role: {{data['role'] | safe }}</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h3 style="text-align: center;">Collage ID: {{data['c_id'] | safe }}</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h3 style="text-align: center;">Collage Name: {{data['c_name'] | safe }}</h3>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
-                                <h3 style="text-align: center;">class: </h3>
-                                {% for x in cl %}
-                                <h4 style="text-align: center;">{{x['class_name']}}</h4>      
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    <hr>
-
-                    <h2>Functions</h2>
-                    <div class="row">
-                        <div class="col d-flex p-2">
-                            <a href="{{'createstudent'}}" class="btn btn-success">Add Student</a>
-                        </div>
-                        <div class="col d-flex p-2">
-                            <a href="{{'attendance'}}" class="btn btn-warning">Check Attendence</a>
-                        </div>
-                        <div class="col d-flex p-2">
-                            <a href="{{'previous'}}" class="btn btn-light">Previous</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col d-flex p-2">
-                            <a href="{{'updateatt'}}" class="btn btn-dark">Update</a>
-                        </div>
-                        <div class="col d-flex p-2">
-                            <a href="{{'editing'}}" class="btn btn-danger">Edit Student</a>
-                        </div>
-                        <div class="col d-flex p-2">
-                            <a href="{{'view'}}" class="btn btn-info">complaints</a>
-                        </div>
-                    </div>
-
-                    
-                    <hr>
-                    
-
-                </div>
-
-
-
-            </div>
-
-        </div>
-
-    </div>
-    
-   
-    
-
-
-</body>
-</html> -->

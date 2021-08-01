@@ -2,26 +2,223 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOE</title>
+    <!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="{{url_for('static', filename='landing.css')}}">
     <link rel = "icon" href = 
     "http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
             type = "image/x-icon">
-    <link rel = "icon" href = 
-"http://pngimg.com/uploads/letter_a/letter_a_PNG24.png" 
-        type = "image/x-icon">
-    <link rel="stylesheet" href="{{url_for('static', filename='landing.css')}}">
+    <title>landing page</title>
+    <style>
+    :root{
+    --primary: #7f83ff;
+    --secondary: #f15900;
+    --grey: #555;
+    --white: #fff;
+    --dark: #2f2d2d;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /* 10px = 1rem*/
+}
+
+body{
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.6rem;
+}
+
+ul,li{
+    list-style: none;
+}
+.tit{
+    color: #FF9900;
+    font-size: 3rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.container{
+    max-width: 114rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1200px){
+    .container{
+        padding: 0 3rem;
+    }
+}
+
+.header{
+    position: relative;
+    min-height: 100vh;
+}
+
+nav.nav{
+    padding: 1.6rem 0;
+}
+
+.nav__center{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    height: 3rem;
+}
+
+.btn{
+    display: inline-block;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    background-color: transparent;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.nav__btn:not(:last-child){
+    margin-right: .7rem;
+}
+
+.nav__btn{
+    padding: 1rem 1.3rem;
+    border-radius: 5rem;
+}
+
+.nav__btn.signup{
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.btn:hover{
+    background-color: var(--secondary);
+}
+
+.content{
+    width: 55%;
+    margin-top: 1.6rem;
+    text-align: center;
+}
+
+.content h1{
+    color: var(--dark);
+    font-size: 4.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.content p{
+    color: var(--grey);
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+}
+
+.hero .hero__btn{
+    padding: 1.6rem 3rem;
+    width: 15rem;
+    max-width: 40%;
+    border: 1px solid var(--primary);
+    border-radius: 1rem;
+}
+
+.hero .hero__btn:not(:last-child){
+    margin-right: 1rem;
+}
+
+.hero .hero__btn.hero__btn-blue{
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.hero .hero__btn.hero__btn-blue:hover{
+        background-color: var(--secondary);
+}
+
+.bottom__img{
+    position: absolute;
+    bottom: 0%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 996px){
+.header{
+    min-height: 90vh;
+}
+
+.content{
+    width: 100%;
+    margin-top: 10rem;
+}
+}
+
+@media only screen and (max-width: 996px){
+.header{
+    min-height: 100vh;
+}
+
+.content h1{
+    font-size: 3rem;
+}
+}
+    </style>
 </head>
 <body>
-    <section class = "main">
-        <div class = "main-content">
-            <h1 class = "title">Smart Attendance System</h1>
-            <h2 class = "subtitle">Robust and efficient way of taking attendance</h2>
-            <br>
-            <!-- <button class = "btn" type="button" onclick='location.href="{{'log'}}";'>let's go</button> -->
-            <a href="{{'firstlog'}}" class="btn btn-info" style="text-decoration: none;">login</a>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__center container">
+                <div class="logo">
+                    
+                    <h1 class="tit">Smart Attendance System</h1>
+                    <!-- <img src="./treva.svg" alt=""> -->
+                </div>
+
+                <!-- <ul class="nav__list">
+                    <button class="btn nav__btn">Sign In</button>
+                    <button class="btn nav__btn signup">Sign Up</button>
+                </ul> -->
+            </div>
+        </nav>
+
+        <div class="hero" style="">
+            <div class="content container">
+                <h1>Manage Your Attendence Here</h1>
+                <p>This is a website for managing attendence related task smoothly.</p>
+                <div class="buttons" >
+                    <a href="{{'firstlog'}}" class="btn hero__btn" style="background-color: #7f83ff;text-decoration: none;">LogIn</a>
+                    <a href="{{'signup'}}" class="btn hero__btn" style="background-color: white;text-decoration: none;color:black">SignUp</a>
+                    
+                    <!-- <button class="btn hero__btn" style="color:black;">SignUp</button> -->
+                </div>
+            </div>
+
+            <div class="bottom__img">
+                <img src="{{url_for('static', filename='bg.svg')}}">
+                
+            </div>
         </div>
-    </section>
+    </header>
 </body>
 </html>
+
+
+

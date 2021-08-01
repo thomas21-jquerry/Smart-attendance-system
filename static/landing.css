@@ -1,4 +1,174 @@
+:root{
+    --primary: #7f83ff;
+    --secondary: #f15900;
+    --grey: #555;
+    --white: #fff;
+    --dark: #2f2d2d;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /* 10px = 1rem*/
+}
+
 body{
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.6rem;
+}
+
+ul,li{
+    list-style: none;
+}
+.tit{
+    color: #FF9900;
+    font-size: 3rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.container{
+    max-width: 114rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1200px){
+    .container{
+        padding: 0 3rem;
+    }
+}
+
+.header{
+    position: relative;
+    min-height: 100vh;
+}
+
+nav.nav{
+    padding: 1.6rem 0;
+}
+
+.nav__center{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    height: 3rem;
+}
+
+.btn{
+    display: inline-block;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    background-color: transparent;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.nav__btn:not(:last-child){
+    margin-right: .7rem;
+}
+
+.nav__btn{
+    padding: 1rem 1.3rem;
+    border-radius: 5rem;
+}
+
+.nav__btn.signup{
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.btn:hover{
+    background-color: var(--secondary);
+}
+
+.content{
+    width: 55%;
+    margin-top: 1.6rem;
+    text-align: center;
+}
+
+.content h1{
+    color: var(--dark);
+    font-size: 4.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.content p{
+    color: var(--grey);
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+}
+
+.hero .hero__btn{
+    padding: 1.6rem 3rem;
+    width: 15rem;
+    max-width: 40%;
+    border: 1px solid var(--primary);
+    border-radius: 1rem;
+}
+
+.hero .hero__btn:not(:last-child){
+    margin-right: 1rem;
+}
+
+.hero .hero__btn.hero__btn-blue{
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.hero .hero__btn.hero__btn-blue:hover{
+        background-color: var(--secondary);
+}
+
+.bottom__img{
+    position: absolute;
+    bottom: 0%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 996px){
+.header{
+    min-height: 90vh;
+}
+
+.content{
+    width: 100%;
+    margin-top: 10rem;
+}
+}
+
+@media only screen and (max-width: 996px){
+.header{
+    min-height: 100vh;
+}
+
+.content h1{
+    font-size: 3rem;
+}
+}
+
+
+/* body{
     padding: 0;
     margin: 0;
 }
@@ -61,4 +231,4 @@ body{
     color:white;
     background: black ;
     transition: background .3s ease-out;
-}
+} */

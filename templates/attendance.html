@@ -32,7 +32,8 @@
         <form action="{{ url_for('find')}}" id="myform" enctype="multipart/form-data" method="POST">
             <div class="txt_field">
                 <label>Time:</label>
-                <input type="number"  name="time" required>
+                <input type="time" name="time">
+                <!-- <input type="number"  name="time" required> -->
             </div>
             <div style="padding-bottom: 20px; color: grey;">
                 <label style="color: grey;">Date:</label>

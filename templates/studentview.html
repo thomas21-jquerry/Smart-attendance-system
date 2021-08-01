@@ -9,27 +9,24 @@
 	<link rel="stylesheet" href="{{url_for('static', filename='student.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='demo.css')}}">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: rgba(0,0,0,0.6);">
-        <div class="container-fluid" style="font-size: 20px;">
-          <a class="navbar-brand" href="#" style="margin-left:5%;"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" style="margin-left: 7vh;">
-              <a class="nav-link" href="https://github.com/thomas21-jquerry/SmartAttendanceSystem"><i class="fab fa-github"></i></a>
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="{{'logout'}}">Logout</a>
-              
-             
-              
-            </div>
-          </div>
-        </div>
-    </nav>
+    <div class="topnav" id="myTopnav">
+        <a href="#" class="active" style="background-color:#14ad00f1;width:10%"><i class="fas fa-atlas" style="font-size: 1.5em;"></i></a>
+        <a href="#">About</a>
+        <a href="{{'redirect'}}">Home</a>
+        <a href="{{'logout'}}">logout</a>
+
+        <a href="https://github.com/thomas21-jquerry/Smart-attendance-system"><i class="fab fa-github" style="font-size: 1.5em;"></i></i></a>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </div>
 
     <div class="wrapper" style="height: max-content;">
         <div class="left" style="background: linear-gradient(to right,#14ad00f1,#0bff03); height: 100vh;width: 40%;left:0; margin:0 0">
@@ -141,7 +138,7 @@
                         {% set testing = x['_id'] %}
                         {% set time = testing[0:2] %}
                         {% set date = testing[3:] %}
-                        <td>{{time}}</td>
+                        <td>{{time}}:00</td>
                         <td>{{date}}</td>
                         {% if nam in x['present'] %}
                         {% set presentcount.value = presentcount.value + 1 %}

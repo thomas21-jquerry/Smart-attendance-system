@@ -51,6 +51,7 @@ def login():
                     tr=db[session['college_id']+"_teachers"]
                     y=cla.find({})
                     z=tr.find({})
+                   
                     return render_template('adminview.html',data=existing_user,cl=y,t=z)
                 elif existing_user['role']=="teacher":
                     cla=db[session['college_id']+"_classes"]
@@ -140,25 +141,42 @@ def redirect():
     elif existing_user['role']=="student":
             att=db[session['college_id']+"_"+existing_user['class_id']+"_attendance"]
             x=att.find({})
-            teachernames=set()
             
-            
+            subjectName=set()
             for i in x:
-                teachernames.add(i['subject'])
-            teachernames = list(teachernames)
+                subjectName.add(i['subject'])
+            subjectName = list(subjectName)
             countatt=[]
-            for i in teachernames:
+            
+           
+            for i in subjectName:
                 countatt.append(0)
-                   
+            
             dupli = att.find({})
             for i in dupli:
-                if session['personal_name'] in i['present']:
-                        a = teachernames.index(i['teacher'])
-                        countatt[a]+=1
-                        
+                if [session['personal_name'],session['personal_id']] in i['present']:
+                    a = subjectName.index(i['subject'])
+                    countatt[a]+=1
+            
+            
+            dupli = att.find({})
+            totalAttendance = [0 for i in subjectName]
+            for i in dupli:
+                ind = subjectName.index(i['subject'])
+                totalAttendance[ind]+=1
+            avgAttendance = [0 for i in subjectName]
+            
+            for i in range(len(countatt)):
+                avgAttendance[i] = int((countatt[i]/totalAttendance[i])*100)
+            
+        
+            dupli = att.find({})
+            
+            x=att.find({})
+                
            
                     
-            return render_template('studentview.html',data=existing_user,teachernames=teachernames, countatt= countatt)
+            return render_template('studentview.html',data=existing_user,teachernames=subjectName,countatt= countatt,at=dupli,nam = [session['personal_name'],session['personal_id']],avgAttendance = avgAttendance, totalAttendance=totalAttendance,subjectNames=subjectName,presentAtt = countatt)
             
 
 
@@ -218,9 +236,7 @@ def creatingclass():
         infoc=db[session['college_id']+"_classes"]
         tput=req.get("tags-input")
         tput=list(tput.split(",")) 
-        print(tput)
-        print(type(tput))
-        print(tput[0])
+       
         sah=[]
         for x in tput:
             sah.append(class_name+"/"+x)
@@ -349,7 +365,7 @@ def creating():
         image.filename=p_id+".jpg"
         file_path = os.path.join(basepath, 'static', secure_filename(image.filename))
         image.save(file_path)
-        print(file_path)
+        
         img = face_recognition.load_image_file(file_path)
         
         encode = face_recognition.face_encodings(img)
@@ -393,6 +409,8 @@ def find():
         credent = request.form.to_dict()
         clas=credent['class']
         time=credent['time']
+        time = str(time)
+        time = time[:2]
         d2=credent['dat']
         image=request.files['imgfile']
         d1=str(time+"-"+d2)
@@ -419,18 +437,19 @@ def find():
 
         
         
-        
+        filename = str(d1)
+        filename = filename+".jpg"
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
-                basepath, 'static2', secure_filename(image.filename))
+                basepath, 'static/attended', secure_filename(filename))
         
         image.save(file_path)
-        print(file_path)
+        
         img = face_recognition.load_image_file(file_path)
-        #img = cv2.cvtColor(trials,cv2.COLOR_BGR2RGB)
+        
         facesCurFrame = face_recognition.face_locations(img)
         encodesCurFrame = face_recognition.face_encodings(img,facesCurFrame)
-        #print(type(encodesCurFrame))
+        
         
 
 
@@ -451,7 +470,7 @@ def find():
                 matchIndex = np.argmin(faceDis)
                 if matches[matchIndex]:
                     name = classNames[matchIndex]
-                    #print(name)
+                    
                     used=col.find_one(({"name":name}))
                     PresentNames.append([name,used['_id']])
         present=list()
@@ -474,13 +493,13 @@ def find():
         
     
         
-        
+        print(present)
         postp = {"_id":d1,"subject":clas,"present":present,"absent":absent,"class_id":existing_user['_id']}
         coll.insert_one(postp)
 
-        os.remove(file_path)
+        # os.remove(file_path)
         print(d1)
-        return render_template('attended.html',val=present,vall=absent,divasam=d2,samayam=time,class_info=existing_user['_id'],simple=d1)
+        return render_template('attended.html',val=present,vall=absent,divasam=d2,samayam=time,class_info=existing_user['_id'],simple=d1,fname = filename)
 
 
 @app.route('/logout')
@@ -565,8 +584,7 @@ def processing():
                 studentNames.append(studentNam[i]["name"])
                 
             
-            print(studentNames)
-            print(type(studentNames))
+           
             
 
             x = list(x)
@@ -575,7 +593,9 @@ def processing():
             for i in range(len(x)):
                 idlist.append(x[i]['_id'])
             # print(x[5]['present'][0][0])
-            attend= [idlist]
+            attend = []
+            attend.append(idlist)
+            
             for i in range(len(studentNames)):
                 dummy = [studentNames[i]]
                 for j in range(len(x)):
@@ -584,19 +604,21 @@ def processing():
                         #     dummy.append("present")
                         # else:
                         #     dummy.append("absent")
+                        fla = 0
                         for k in range(len(x[j]['present'])):
                             if studentNames[i] == x[j]['present'][k][0]:
                                 dummy.append("present")
+                                fla = 1
+                                break
+                        if fla == 0:
+                            dummy.append("absent")  
                             
-                            else:
-                                dummy.append("absent")
-
                     else:
                         dummy.append("absent")
                 attend.append(dummy)
 
 
-            print(attend)
+            
             filename = "attendance1.csv"
             
           
@@ -641,7 +663,7 @@ def download():
     # p = "attendance.csv"
     
     # return send_file(p, as_attachment=True)
-    print("hellllo")
+    
     path = "attendance1.csv"
     return send_file(path, as_attachment=True)
 
@@ -729,8 +751,11 @@ def edit():
         pwd=credent['pwd']
         
         image = request.files['imagefile']
+
         basepath = os.path.dirname(__file__)
+        image.filename = str(p_id)+".jpg"
         file_path = os.path.join(basepath, 'static', secure_filename(image.filename))
+
         image.save(file_path)
         print(file_path)
         img = face_recognition.load_image_file(file_path)
@@ -811,8 +836,7 @@ def sendstat():
         oldp=copy['present']
         olda=copy['absent']
 
-        
-        
+       
 
         
         if(change_state=="absent"):
